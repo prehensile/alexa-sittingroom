@@ -29,8 +29,7 @@ class OulipoS7( object ):
 
     def shift( self, noun, offset ):
         nouns = self._nouns
-        i = nouns.index( noun )
-        i = min( i+offset, len(nouns) )
+        i = (nouns.index( noun ) + offset) % len(nouns)
         return nouns[ i ]
 
 
