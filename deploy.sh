@@ -1,4 +1,5 @@
 cd src
+rm *.zip
 zappa package
 ZIPFILE=`ls *.zip`
 echo "Uploading $ZIPFILE"
