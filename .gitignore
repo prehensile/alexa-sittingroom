@@ -5,3 +5,4 @@ zappa_settings.json
 _scratch.py
 nltk_data
 _test.py
+.DS_Store
