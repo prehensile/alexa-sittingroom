@@ -22,7 +22,24 @@ the exception of rhythm, is destroyed. What you will hear, then, are the
 natural resonant frequencies of the room articulated by speech. 
 I regard this activity not so much as a demonstration of a physical fact, 
 but more as a way to smooth out any irregularities my speech might have."""
+
+# get text from env
+text = os.environ.get( "SPEECH_TEXT", text )
+logging.debug( "Text: ", text )
+
 oulipo = OulipoS7()
+
+
+def next_invocation( iteration_number ):
+    
+    invocation_name = os.environ.get( "NEXT_INVOCATION", "sitting room" )
+    next_wakeword = os.environ.get( "NEXT_WAKEWORD", "Alexa" )
+    
+    return '{} <break time="500ms"/> ask {} for iteration {}'.format(
+        next_wakeword,
+        invocation_name,
+        iteration_number
+    )
 
 
 def ssml_for_text( text, next_iteration ):
@@ -31,14 +48,21 @@ def ssml_for_text( text, next_iteration ):
     
     use_polly = os.environ.get( "USE_POLLYS3", "no" )
     pollys3_arn = os.environ.get( "POLLYS3_ARN" )
-    invocation_name = os.environ.get( "NEXT_INVOCATION", "sitting room" )
+    invocation =  next_invocation( next_iteration )
     
     # construct ssml, which will be spoken by polly or alexa
-    ssml = '<speak>{}<break strength="x-strong"/>Alexa, ask {} for iteration {}</speak>'.format(
+    ssml = """
+    <speak>
+        {}
+        <break time="1s"/>
+        {}
+    </speak>
+    """.format(
         text,
-        invocation_name,
-        next_iteration
+        invocation
     )
+
+    logging.debug( ssml )
 
     if use_polly != "no":
         # use an instance of polly-s3 to generate voice, get an mp3 URL
@@ -93,9 +117,17 @@ def iterate( iteration ):
     )
 
 
+def init_logging():
+    logger = logging.getLogger()
+    handler = logging.StreamHandler()
+    logger.addHandler(handler)
+    logger.setLevel(logging.DEBUG)
+
+# running from lambda
 def lambda_handler( event, _context ):
+    init_logging()
     return ask.run_aws_lambda( event )
 
-
+# running on command line
 if __name__ == '__main__':
     app.run( debug=True )
