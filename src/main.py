@@ -8,7 +8,7 @@ from flask_ask import Ask, statement, question
 import boto3
 
 from oulipo import OulipoS7
-
+from dynamodb import DynamoDBHandler
 
 app = Flask( __name__ )
 ask = Ask( app, '/' )
@@ -27,7 +27,11 @@ but more as a way to smooth out any irregularities my speech might have."""
 text = os.environ.get( "SPEECH_TEXT", text )
 logging.debug( "Text: ", text )
 
+# init oulipo instance
 oulipo = OulipoS7()
+
+# dynamodb connector
+dynamo = DynamoDBHandler()
 
 
 def next_invocation( iteration_number ):
@@ -35,7 +39,7 @@ def next_invocation( iteration_number ):
     invocation_name = os.environ.get( "NEXT_INVOCATION", "sitting room" )
     next_wakeword = os.environ.get( "NEXT_WAKEWORD", "Alexa" )
     
-    return '{} <break time="500ms"/> ask {} for iteration {}'.format(
+    return '{} <break time="500ms"/> ask {} for iteration number {}'.format(
         next_wakeword,
         invocation_name,
         iteration_number
@@ -100,6 +104,10 @@ def help():
 @ask.intent( 'IterateIntent', mapping={'iteration': 'IterationNumber'} )
 def iterate( iteration ):
     
+    if iteration is None:
+        logging.debug( "Iteration is NONE, fetch from dynamodb..." )
+        iteration = dynamo.get_iteration() + 1
+
     iteration = int( iteration )
     
     logging.debug( "IterateIntent, iteration #%d", iteration )
@@ -110,6 +118,11 @@ def iterate( iteration ):
         iterated,
         iteration + 1
     )
+
+    try:
+        dynamo.set_iteration( iteration )
+    except Exception as e:
+        logging.exception( e )
     
     return statement( speech ).simple_card(
         'Iteration #{}'.format( iteration ),
