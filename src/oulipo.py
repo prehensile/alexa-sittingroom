@@ -1,9 +1,12 @@
 import os
 import random
+import logging
 
 import nltk
-
 from nltk import pos_tag, word_tokenize
+
+import inflect
+
 
 def init_ntlk():    
     pth = os.path.join( os.path.realpath( os.path.dirname(__file__) ), "nltk_data" )
@@ -11,26 +14,41 @@ def init_ntlk():
 
 init_ntlk()
 
+p = inflect.engine()
+
 
 class OulipoS7( object ):
     """docstring for OulipoS7"""
     
     def __init__( self, seed=None ):
         super(OulipoS7, self).__init__()
-        self._nouns = self._load_nouns( "nouns.txt" )
+        # load wordlists
+        self._nouns = self._load_wordlist( "nouns.txt" )
+        # self._adjectives = self._load_wordlist( "adjectives.txt" )
+        # we'll use this instance of Random so we can control the state of its PRG 
         self._random = random.Random( seed )
 
 
-    def _load_nouns( self, data_path ):
-        with( open(data_path) ) as fh:
-            nouns = [ line.rstrip() for line in fh ]
-        return nouns
+    def _load_wordlist( self, dict_path ):
+        with( open(dict_path) ) as fh:
+            wl = [ line.rstrip() for line in fh ]
+        return wl
      
 
     def shift( self, noun, offset ):
         nouns = self._nouns
-        i = (nouns.index( noun ) + offset) % len(nouns)
-        return nouns[ i ]
+        
+        # get the singular form of input noun
+        singular = p.singular_noun( noun )
+        # nouns wordlist is singular forms, so look up the singular and calculate offset index
+        i = (nouns.index( singular ) + offset) % len(nouns)
+        # get the offset noun from wordlist
+        out = nouns[ i ]
+        # assume that if singular != original noun, original is plural
+        if noun != singular:
+            # re-pluralise offset noun before returning
+            out = p.plural( singular )
+        return out
 
 
     def iterate( self, text, iterations, seed=None ):
@@ -60,6 +78,7 @@ class OulipoS7( object ):
                 # decrement counter...
                 iterations -=1
             except ValueError as e:
+                logging.exception( e )
                 pass
 
         return " ".join( words_out )
