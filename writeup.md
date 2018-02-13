@@ -1,4 +1,5 @@
 > I am sitting in a room different from the one you are in now. I am recording the sound of my speaking voice and I am going to play it back into the room again and again until the resonant frequencies of the room reinforce themselves so that any semblance of my speech, with perhaps the exception of rhythm, is destroyed. What you will hear, then, are the natural resonant frequencies of the room articulated by speech. I regard this activity not so much as a demonstration of a physical fact, but more as a way to smooth out any irregularities my speech might have.
+- Alvin Lucier, _I am sitting in a room_, 1969
 
 At the end of 2017, [Tim Cowlishaw](http://www.timcowlishaw.co.uk/) and I had a few conversations with folk that started us off thinking about Amazon Echo (and things like it — voice devices / 'smart speakers' in general) as experimental sound objects. Not necessarily thinking about the voice-controlled aspects of them as the potential they offer as a decent speaker, backed by some computing power and connected to a network.
 
