@@ -1,6 +1,7 @@
 import logging 
 import os
 import json
+import random
 
 from flask import Flask
 from flask_ask import Ask, statement, question
@@ -45,6 +46,24 @@ def next_invocation( iteration_number ):
         iteration_number
     )
 
+# Geraint, Kimberly, Kendra, Amy, Raveena, Emma, Nicole, Justin, Joanna, Brian, Salli, Russell, Matthew, Ivy, Joey
+POLLY_VOICES = [
+    "Geraint",
+    "Kimberly",
+    "Kendra",
+    "Amy",
+    "Raveena",
+    "Emma",
+    "Nicole",
+    "Justin",
+    "Joanna",
+    "Brian",
+    "Salli",
+    "Russell",
+    "Matthew",
+    # breaks the chain # "Ivy",
+    "Joey" 
+]
 
 def ssml_for_text( text, next_iteration ):
     
@@ -73,9 +92,10 @@ def ssml_for_text( text, next_iteration ):
         boto_lambda = boto3.client( 'lambda' )
         r = boto_lambda.invoke(
             FunctionName=pollys3_arn,
-            Payload=json.dumps(
-                { "text" : ssml }
-            )
+            Payload=json.dumps({
+                "text" : ssml,
+                "VoiceId" : random.choice( POLLY_VOICES )
+            })
         )
         payload = r['Payload']
         url = json.load( payload )
@@ -136,10 +156,12 @@ def init_logging():
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
 
+
 # running from lambda
 def lambda_handler( event, _context ):
     init_logging()
     return ask.run_aws_lambda( event )
+
 
 # running on command line
 if __name__ == '__main__':
