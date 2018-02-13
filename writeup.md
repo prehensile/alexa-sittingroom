@@ -5,7 +5,7 @@ At the end of 2017, [Tim Cowlishaw](http://www.timcowlishaw.co.uk/) and I had a 
 
 The first experiment we made was a reworking of [inbflat.net](http://inbflat.net), using a room full of Echoes to play parts of the piece. There's a reference to Janet Cardiff's [Forty Part Motet](http://www.cardiffmiller.com/artworks/inst/motet.html) there too, one of the most affecting and beautiful sound art pieces I've seen in recent years.
 
-Meanwhile, Tim was riffing on Alvin Lucier's [*I Am Sitting in a Room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room). Lucier made the piece in 1969 by recording himself reciting a text, and then playing back the tape into a room and recording the room sound on another tape deck. He repeated this process over and over again, until the generation loss and cumulative room sound completely destroyed the sound of his voice.
+Meanwhile, Tim was riffing on Alvin Lucier's [*I am sitting in a room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room). Lucier made the piece in 1969 by recording himself reciting a text, and then playing back the tape into a room and recording the room sound on another tape deck. He repeated this process over and over again, until the generation loss and cumulative room sound completely destroyed the sound of his voice.
 
 Brilliantly, the text was a description of this process, quoted above. He described what he was going to do, how it was going to work and then the act of carrying out his stated intent destroyed the sense in the recording. As programmers and sound nerds, we were both really attracted to the self-reflexive, inwardly-curling nature of the piece.
 
