@@ -28,4 +28,8 @@ As I started to do this, though, I ran into a wall. I couldn't decide whether to
 
 The answer popped into my head while I was having a swim. Since we were using two devices in conversation, I could write both points of view, one for each device! This made the piece more interesting anyway, since I could explore the disjoints between the two constructed personalities by putting them into dialogue and have them both dissolve each other into meaninglessness through repetition and iteration. Lovely.
 
-https://www.youtube.com/watch?v=i2y5I7nAsNU
+[![Alt text](https://img.youtube.com/vi/i2y5I7nAsNU/0.jpg)](https://www.youtube.com/watch?v=i2y5I7nAsNU)
+
+*Why the different voices, Henry?* I'm glad you asked. I think it's disingenuous for services like Alexa to give the impression of having a coherent, intelligent personality when the thing that talks to you is a patchwork of many complex systems, all running in server farms far away. The device sat in your room is not Alexa - it's the business end of a very large, very complex networked iceberg. I also think that it's a problem that the personality it pretends to have is bland, subservient, coded female - a 1950s secretary in a box. This is why I like to make things that speak with many voices for these devices - a truer reflection of the herd of algorithms running things behind the scenes, and less bound to a particular false personality.
+
+I use [Amazon Polly](https://aws.amazon.com/documentation/polly/) to synthesize these many voices, which is not the most straightforward to use on the fly. Thus, a nice offshoot of this project has been the [polly-s3](https://www.npmjs.com/package/polly-s3) module I wrote for node.js, which makes it easier to use in dynamic voice applications.
