@@ -130,6 +130,10 @@ def iterate( iteration ):
 
     iteration = int( iteration )
     
+    # offset the iteration with an env var, if present
+    iteration_offset = int( os.environ.get( "ITERATION_OFFSET", "0" ) )
+    iteration = min( 0, iteration + iteration_offset )
+
     logging.debug( "IterateIntent, iteration #%d", iteration )
     
     iterated = oulipo.iterate( text, iteration, seed=628103 )
