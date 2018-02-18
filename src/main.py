@@ -1,6 +1,7 @@
 import logging 
 import os
 import json
+import random
 
 from flask import Flask
 from flask_ask import Ask, statement, question
@@ -8,7 +9,7 @@ from flask_ask import Ask, statement, question
 import boto3
 
 from oulipo import OulipoS7
-
+from dynamodb import DynamoDBHandler
 
 app = Flask( __name__ )
 ask = Ask( app, '/' )
@@ -27,7 +28,11 @@ but more as a way to smooth out any irregularities my speech might have."""
 text = os.environ.get( "SPEECH_TEXT", text )
 logging.debug( "Text: ", text )
 
+# init oulipo instance
 oulipo = OulipoS7()
+
+# dynamodb connector
+dynamo = DynamoDBHandler()
 
 
 def next_invocation( iteration_number ):
@@ -35,12 +40,30 @@ def next_invocation( iteration_number ):
     invocation_name = os.environ.get( "NEXT_INVOCATION", "sitting room" )
     next_wakeword = os.environ.get( "NEXT_WAKEWORD", "Alexa" )
     
-    return '{} <break time="500ms"/> ask {} for iteration {}'.format(
+    return '{} <break time="500ms"/> ask {} for iteration number {}'.format(
         next_wakeword,
         invocation_name,
         iteration_number
     )
 
+# Geraint, Kimberly, Kendra, Amy, Raveena, Emma, Nicole, Justin, Joanna, Brian, Salli, Russell, Matthew, Ivy, Joey
+POLLY_VOICES = [
+    "Geraint",
+    "Kimberly",
+    "Kendra",
+    "Amy",
+    "Raveena",
+    "Emma",
+    "Nicole",
+    "Justin",
+    "Joanna",
+    "Brian",
+    "Salli",
+    "Russell",
+    "Matthew",
+    # breaks the chain # "Ivy",
+    "Joey" 
+]
 
 def ssml_for_text( text, next_iteration ):
     
@@ -69,9 +92,10 @@ def ssml_for_text( text, next_iteration ):
         boto_lambda = boto3.client( 'lambda' )
         r = boto_lambda.invoke(
             FunctionName=pollys3_arn,
-            Payload=json.dumps(
-                { "text" : ssml }
-            )
+            Payload=json.dumps({
+                "text" : ssml,
+                "VoiceId" : random.choice( POLLY_VOICES )
+            })
         )
         payload = r['Payload']
         url = json.load( payload )
@@ -100,8 +124,16 @@ def help():
 @ask.intent( 'IterateIntent', mapping={'iteration': 'IterationNumber'} )
 def iterate( iteration ):
     
+    if iteration is None:
+        logging.debug( "Iteration is NONE, fetch from dynamodb..." )
+        iteration = dynamo.get_iteration() + 1
+
     iteration = int( iteration )
     
+    # offset the iteration with an env var, if present
+    iteration_offset = int( os.environ.get( "ITERATION_OFFSET", "0" ) )
+    iteration = min( 0, iteration + iteration_offset )
+
     logging.debug( "IterateIntent, iteration #%d", iteration )
     
     iterated = oulipo.iterate( text, iteration, seed=628103 )
@@ -110,6 +142,11 @@ def iterate( iteration ):
         iterated,
         iteration + 1
     )
+
+    try:
+        dynamo.set_iteration( iteration )
+    except Exception as e:
+        logging.exception( e )
     
     return statement( speech ).simple_card(
         'Iteration #{}'.format( iteration ),
@@ -123,10 +160,12 @@ def init_logging():
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
 
+
 # running from lambda
 def lambda_handler( event, _context ):
     init_logging()
     return ask.run_aws_lambda( event )
+
 
 # running on command line
 if __name__ == '__main__':
