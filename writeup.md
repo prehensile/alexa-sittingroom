@@ -1,10 +1,12 @@
 > I am sitting in a room different from the one you are in now. I am recording the sound of my speaking voice and I am going to play it back into the room again and again until the resonant frequencies of the room reinforce themselves so that any semblance of my speech, with perhaps the exception of rhythm, is destroyed. What you will hear, then, are the natural resonant frequencies of the room articulated by speech. I regard this activity not so much as a demonstration of a physical fact, but more as a way to smooth out any irregularities my speech might have.
 
+Alvin Lucier, [*I am sitting in a room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room), 1969
+
 At the end of 2017, [Tim Cowlishaw](http://www.timcowlishaw.co.uk/) and I had a few conversations with folk that started us off thinking about Amazon Echo (and things like it — voice devices / 'smart speakers' in general) as experimental sound objects. Not necessarily thinking about the voice-controlled aspects of them as the potential they offer as a decent speaker, backed by some computing power and connected to a network.
 
 The first experiment we made was a reworking of [inbflat.net](http://inbflat.net), using a room full of Echoes to play parts of the piece. There's a reference to Janet Cardiff's [Forty Part Motet](http://www.cardiffmiller.com/artworks/inst/motet.html) there too, one of the most affecting and beautiful sound art pieces I've seen in recent years.
 
-Meanwhile, Tim was riffing on Alvin Lucier's [*I Am Sitting in a Room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room). Lucier made the piece in 1969 by recording himself reciting a text, and then playing back the tape into a room and recording the room sound on another tape deck. He repeated this process over and over again, until the generation loss and cumulative room sound completely destroyed the sound of his voice.
+Meanwhile, Tim was riffing on Alvin Lucier's _I am sitting in a room_. Lucier made the piece in 1969 by recording himself reciting a text, and then playing back the tape into a room and recording the room sound on another tape deck. He repeated this process over and over again, until the generation loss and cumulative room sound completely destroyed the sound of his voice.
 
 Brilliantly, the text was a description of this process, quoted above. He described what he was going to do, how it was going to work and then the act of carrying out his stated intent destroyed the sense in the recording. As programmers and sound nerds, we were both really attracted to the self-reflexive, inwardly-curling nature of the piece.
 
@@ -14,9 +16,9 @@ Unfortunately, the market-dominant voice devices just don't work like that. They
 
 Tim manged to [simulate](https://gist.github.com/timcowlishaw/2d8917ff1b471ec4317b7c188bdd3f44) the kind of loop we wanted outside of a VUI system, but if we were going to make a piece for voice devices, we needed to contrive a source of errors. 
 
-Which made me think of *Oulipo S+7*. 
+Which made me think of [*Oulipo S+7*](https://en.wikipedia.org/wiki/Oulipo#Constraints). 
 
-I first came across S+7 on Ross Sutherland's excellent podcast [Imaginary Advice](https://www.imaginaryadvice.com/). The [particular episode](https://soundcloud.com/ross-sutherland/32-jerusalem-7) I'm thinking of was a recording of a collaboration between Sutherland and Matthew Kaner, where Sutherland had rewritten Jerusalem using a writing technique where nouns and verbs in the original text are replaced by words a few steps removed in the dictionary. *Room* becomes *Roosevelt* and so on. The technique is called [Oulipo S+7](https://en.wikipedia.org/wiki/Oulipo#Constraints), after the French-speaking group of writers and mathematicians who devised it in the 1960s.
+I first came across S+7 on Ross Sutherland's excellent podcast [Imaginary Advice](https://www.imaginaryadvice.com/). The [particular episode](https://soundcloud.com/ross-sutherland/32-jerusalem-7) I'm thinking of was a recording of a collaboration between Sutherland and Matthew Kaner, where Sutherland had rewritten Jerusalem using a writing technique where nouns and verbs in the original text are replaced by words a few steps removed in the dictionary. *Room* becomes *Roosevelt* and so on. The technique is named *Oulipo S+7* after the French-speaking group of writers and mathematicians who devised it in the 1960s.
 
 I immediately liked the language glitches introduced by S+7 — they reminded me of generative language experiments I've known and loved in the past, during my time messing about with Twitter bots. 
 
@@ -28,4 +30,10 @@ As I started to do this, though, I ran into a wall. I couldn't decide whether to
 
 The answer popped into my head while I was having a swim. Since we were using two devices in conversation, I could write both points of view, one for each device! This made the piece more interesting anyway, since I could explore the disjoints between the two constructed personalities by putting them into dialogue and have them both dissolve each other into meaninglessness through repetition and iteration. Lovely.
 
-https://www.youtube.com/watch?v=i2y5I7nAsNU
+Here's a video of it iterating away:
+
+[![Watch I Am Running In The Cloud on Youtube](https://img.youtube.com/vi/o0n0Dfk1WOU/0.jpg)](https://www.youtube.com/watch?v=o0n0Dfk1WOU)
+
+*Why the different voices, Henry?* I'm glad you asked. I think it's disingenuous for services like Alexa to give the impression of having a coherent, intelligent personality when the thing that talks to you is a patchwork of many complex systems, all running in server farms far away. The device sat in your room is not Alexa - it's the business end of a very large, very complex networked iceberg. I also think that it's a problem that the personality it pretends to have is bland, subservient, coded 'female' - a stereotype of a 1950s secretary in a box. This is why I like to make things that speak with many voices for these devices - a truer reflection of the herd of processes running things behind the scenes, and less bound to a particular false personality.
+
+I use [Amazon Polly](https://aws.amazon.com/documentation/polly/) to synthesize these many voices, which is not the most straightforward to use on the fly. Thus, a nice offshoot of this project has been the [polly-s3](https://www.npmjs.com/package/polly-s3) module I wrote for node.js, which makes it easier to use in dynamic voice applications.
