@@ -5,6 +5,7 @@ from collections import namedtuple
 
 import nltk
 from nltk import pos_tag, word_tokenize
+from nltk.tokenize.moses import MosesDetokenizer
 
 import inflect
 
@@ -18,10 +19,12 @@ def init_ntlk():
 
 init_ntlk()
 
+
 p = inflect.engine()
 
-
 TargetWord = namedtuple( "TargetWord", ['index','word','pos'])
+
+detokenizer = MosesDetokenizer()
 
 
 class OulipoS7( object ):
@@ -108,7 +111,7 @@ class OulipoS7( object ):
                 logging.exception( e )
                 pass
 
-        return " ".join( words_out )
+        return detokenizer.detokenize( words_out, return_str=True )
 
         
 
