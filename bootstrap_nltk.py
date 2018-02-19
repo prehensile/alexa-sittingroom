@@ -7,4 +7,11 @@ pth = os.path.join( pth, "src/nltk_data" )
 if not os.path.exists( pth ):
     os.makedirs( pth )
 
-nltk.download( 'perluniprops', download_dir=pth )
+packages = [
+    'perluniprops',
+    'punkt',
+    'averaged_perceptron_tagger'
+]
+
+for package in packages:
+    nltk.download( package, download_dir=pth )
