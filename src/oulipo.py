@@ -4,20 +4,19 @@ import logging
 from collections import namedtuple
 
 import nltk
-from nltk import pos_tag, word_tokenize
-from nltk.tokenize.moses import MosesDetokenizer
-
 import inflect
-
 
 _MODULE_PATH = os.path.realpath( os.path.dirname(__file__) )
 
-
 def init_ntlk():    
     pth = os.path.join( _MODULE_PATH, "nltk_data" )
+    logging.info( pth )
     nltk.data.path.append( pth )
 
 init_ntlk()
+
+from nltk import pos_tag, word_tokenize
+from nltk.tokenize.moses import MosesDetokenizer
 
 
 p = inflect.engine()
