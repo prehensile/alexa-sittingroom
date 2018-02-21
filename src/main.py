@@ -132,11 +132,11 @@ def iterate( iteration ):
     
     # offset the iteration with an env var, if present
     iteration_offset = int( os.environ.get( "ITERATION_OFFSET", "0" ) )
-    iteration = min( 0, iteration + iteration_offset )
+    iteration_offset = max( 0, iteration + iteration_offset )
 
     logging.debug( "IterateIntent, iteration #%d", iteration )
     
-    iterated = oulipo.iterate( text, iteration, seed=628103 )
+    iterated = oulipo.iterate( text, iteration_offset, seed=628103 )
 
     speech = ssml_for_text(
         iterated,
