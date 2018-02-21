@@ -1,6 +1,6 @@
 > I am sitting in a room different from the one you are in now. I am recording the sound of my speaking voice and I am going to play it back into the room again and again until the resonant frequencies of the room reinforce themselves so that any semblance of my speech, with perhaps the exception of rhythm, is destroyed. What you will hear, then, are the natural resonant frequencies of the room articulated by speech. I regard this activity not so much as a demonstration of a physical fact, but more as a way to smooth out any irregularities my speech might have.
 
-Alvin Lucier, [*I am sitting in a room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room), 1969
+— Alvin Lucier, [*I am sitting in a room*](https://en.wikipedia.org/wiki/I_Am_Sitting_in_a_Room), 1969
 
 At the end of 2017, [Tim Cowlishaw](http://www.timcowlishaw.co.uk/) and I had a few conversations with folk that started us off thinking about Amazon Echo (and things like it — voice devices / 'smart speakers' in general) as experimental sound objects. Not necessarily thinking about the voice-controlled aspects of them as the potential they offer as a decent speaker, backed by some computing power and connected to a network.
 
@@ -28,11 +28,11 @@ At this point, we had a loop of two devices talking to one another and some nice
 
 As I started to do this, though, I ran into a wall. I couldn't decide whether to write this from my point of view ('I am writing code') or the point of view of Alexa-trapped-in-Echo ('I am running in the cloud'). Lucier hadn't had this problem! Since he was speaking his own words, he was simultaneously the writer, performer and subject of the text. For me, these three had become separated by the technology.
 
-The answer popped into my head while I was having a swim. Since we were using two devices in conversation, I could write both points of view, one for each device! This made the piece more interesting anyway, since I could explore the disjoints between the two constructed personalities by putting them into dialogue and have them both dissolve each other into meaninglessness through repetition and iteration. Lovely.
+The answer popped into my head while I was having a swim. Since we were using two devices in conversation, I could write both points of view, one for each device! This made the piece more interesting anyway, since I could explore the disjoints between the two constructed personalities by putting them into dialogue and have them both dissolve each other into meaninglessness through repetition and iteration. Lovely. [Both texts]((https://raw.githubusercontent.com/prehensile/alexa-sittingroom/master/texts.txt)) are available [in the project's github repository](https://github.com/prehensile/alexa-sittingroom).
 
 Here's a video of it iterating away:
 
-[![Watch I Am Running In The Cloud on Youtube](https://img.youtube.com/vi/o0n0Dfk1WOU/0.jpg)](https://www.youtube.com/watch?v=o0n0Dfk1WOU)
+[![Watch I Am Running In The Cloud on Youtube](https://img.youtube.com/vi/TGmrltCuTZQ/0.jpg)](https://www.youtube.com/watch?v=TGmrltCuTZQ)
 
 *Why the different voices, Henry?* I'm glad you asked. I think it's disingenuous for services like Alexa to give the impression of having a coherent, intelligent personality when the thing that talks to you is a patchwork of many complex systems, all running in server farms far away. The device sat in your room is not Alexa - it's the business end of a very large, very complex networked iceberg. I also think that it's a problem that the personality it pretends to have is bland, subservient, coded 'female' - a stereotype of a 1950s secretary in a box. This is why I like to make things that speak with many voices for these devices - a truer reflection of the herd of processes running things behind the scenes, and less bound to a particular false personality.
 
