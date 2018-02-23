@@ -21,7 +21,7 @@ class DynamoDBHandler(object):
 
     def get_table( self ):
         dynamodb = self.get_dbinstance()
-        table_name = os.environ.get( "DYNAMODB_TABLE", "henry-sittingroom" )
+        table_name = os.environ.get( "DYNAMODB_TABLE" )
         return dynamodb.Table( table_name )
 
     def get_iteration( self ):
